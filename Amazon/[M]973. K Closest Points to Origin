@@ -1,0 +1,24 @@
+### solution using heap ###
+
+class Solution(object):
+    def kClosest(self, points, K):
+        """
+        :type points: List[List[int]]
+        :type K: int
+        :rtype: List[List[int]]
+        """
+        H = []
+        heapq.heapify(H)
+        
+        
+        for point in points:
+        
+            dist = reduce(lambda x, y: x**2 + y**2, point)
+            
+            if len(H) < K:
+                heapq.heappush(H,(-1*dist,point))
+            else:
+                heapq.heappushpop(H,(-1*dist, point))
+                
+        return [point for x,point in H]
+                
