@@ -1,3 +1,5 @@
+###Previous answer
+
 class Solution(object):
     def longestPalindrome(self, s):
         """
@@ -17,8 +19,20 @@ class Solution(object):
             r += 1
         return s[l+1:r]
     
-DP Solution time O(n^2), space O(n^2)
+Solution 3: Dynamic Programming (Improving the Brute Force)
+
+Idea
+We can save some repeated computation in the brute force.
+
+First, we define a function P: P(i, j)={TrueFalse(if s[i:j] is palindromic)(if s[i:j] is not palindromic)
+Thus,
+
+P(i, j)=(P(i+1, j-1) and s[i] == s[j])
+The base cases are: P(i, i)=TrueP(i, i+1) = (s[i] == s[i+1])
+This yields a straight forward DP solution, which we first initialize the one and two letters palindromes, and work our way up finding all three letters palindromes, and so on…
 ___
+
+
  if s is '': return s
         
         res = ''
@@ -35,3 +49,25 @@ ___
                     res = s[i:j+1]
         return res
                     
+                    
+
+Solution 3 Update: Improve Space Complexity
+Idea
+or each line of j, dp only depends on previous line of j. Thus, we just need a n by 1 array instead of n by n matrix.
+
+
+if s is '': return ''
+        
+        n = len(s)
+        ans = ''
+        
+        dp = [None for _ in range(n)]
+
+        for j in range(n):
+            for i in range(j+1):
+                if i == j: dp[i] = True
+                elif j == i+1: dp[i] = (s[i] == s[j])
+                else: dp[i] = dp[i+1] and (s[i] == s[j])
+                if dp[i] and j-i+1 > len(ans):
+                    ans = s[i:j+1]
+        return ans
