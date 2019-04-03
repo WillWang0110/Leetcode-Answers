@@ -19,7 +19,9 @@ class Solution(object):
             r += 1
         return s[l+1:r]
     
-Solution 3: Dynamic Programming (Improving the Brute Force)
+Solution 3: Dynamic Programming (Improving the Brute Force) 
+Time Complexity: O(n2)
+Space Complexity: O(n2)
 
 Idea
 We can save some repeated computation in the brute force.
