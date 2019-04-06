@@ -1,4 +1,5 @@
 Sol1: Brute Force
+Time Complexity O(n^2) Space Complexity O(n)
 
 class Solution(object):
     def nextGreaterElements(self, nums):
@@ -22,3 +23,52 @@ class Solution(object):
                         visited.add(idx)
                         break
         return newlist
+
+
+Sol2 Stack
+Time O(2n) Space O(n)
+
+class Solution(object):
+    def nextGreaterElements(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        res = []
+        newlist = [] #containing values of nums
+        
+        nums.reverse()
+        
+        for idx,i in enumerate(nums):
+            while newlist != [] and newlist[len(newlist)-1] <= i:
+                newlist.pop()
+            if newlist == []:
+                res.append(-1)
+            else: 
+                res.append(newlist[len(newlist)-1])
+            newlist.append(i)
+        #return res
+        
+        for idx,i in enumerate(nums):
+            while newlist != [] and newlist[len(newlist)-1] <= i:
+                newlist.pop()
+            if newlist == []:
+                res[idx] = -1
+            else: 
+                res[idx] = newlist[len(newlist)-1]
+            newlist.append(i)
+            
+        res.reverse()
+        
+        return res
+
+
+        
+                
+                    
+            
+                    
+                
+                
+                
+            
