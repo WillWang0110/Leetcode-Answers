@@ -1,0 +1,21 @@
+class Solution(object):
+    def convert(self, s, numRows):
+        """
+        :type s: str
+        :type numRows: int
+        :rtype: str
+        """
+        if numRows == 1:
+            return s
+        rows = [''] * numRows 
+        currow, down = 0,0
+        
+        for c in s:
+            rows[currow] += c
+            if currow == 0 or currow == numRows-1:
+                down ^= 1
+            currow += 1 if down else -1
+            
+        return ''.join(row for row in rows)
+            
+        
