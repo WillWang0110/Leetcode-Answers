@@ -1,0 +1,33 @@
+BFS
+
+
+
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def preorder(self, root, traversal, level):
+        if root:
+            if len(traversal) < level + 1:
+                traversal.append([])
+            traversal[level].append(root.val)
+            self.preorder(root.left,traversal,level+1)
+            self.preorder(root.right,traversal,level+1)
+        return traversal
+        
+    def zigzagLevelOrder(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[List[int]]
+        """
+        ans = self.preorder(root,[],0)
+        for i in range(len(ans)):
+            if i % 2 == 1:
+                ans[i].reverse()
+        return ans
+        
+        
