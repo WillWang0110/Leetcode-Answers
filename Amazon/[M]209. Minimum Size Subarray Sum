@@ -1,0 +1,25 @@
+class Solution(object):
+    def minSubArrayLen(self, s, nums):
+        """
+        :type s: int
+        :type nums: List[int]
+        :rtype: int
+        """
+        sumup,i,j,ans =0,0,-1,len(nums) + 1
+        if not nums or s == 0: return 0 
+        
+        
+        while j < len(nums):
+            if sumup >= s:
+                ans = min(ans, j - i + 1)
+                sumup -= nums[i]
+                i += 1
+
+            else:
+                j += 1
+                if j < len(nums): sumup += nums[j]
+     
+                   
+                    
+                
+        return ans if ans != (len(nums) +1) else 0
