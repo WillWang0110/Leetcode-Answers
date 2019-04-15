@@ -8,7 +8,7 @@ class Solution(object):
         :rtype: int
         """
         sumlist = [0 for _ in range(len(nums)+1)]
-        sumlist[0] = nums[0]
+        sumlist[0] = 0
         cnt = 0
         if not nums: return 0
         
@@ -21,3 +21,19 @@ class Solution(object):
                     cnt += 1
                     
         return cnt
+
+Approach #4 Using hashmap [Accepted]
+
+
+        preSum, ret, size = [0], 0, len(nums)
+        
+        cnt = collections.Counter(preSum)
+        if size == 1:
+            return 1 if nums[0] == k else 0
+        for val in nums:
+            s = preSum[-1] + val
+            preSum.append(s)
+            ret += cnt.get(s-k, 0)
+            cnt[s] = cnt.get(s,0) + 1
+            
+        return ret
