@@ -1,0 +1,11 @@
+class Solution(object):
+    def frequencySort(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        c = collections.Counter(s).most_common()
+        res = ''
+        for w,o in c:
+            res += w*o
+        return res
