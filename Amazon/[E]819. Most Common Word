@@ -1,0 +1,21 @@
+class Solution(object):
+    def mostCommonWord(self, paragraph, banned):
+        """
+        :type paragraph: str
+        :type banned: List[str]
+        :rtype: str
+        """
+        import re
+        
+        banned = set(banned)
+        p1 = re.split("[!,;.?' ]",paragraph.lower()) 
+        p1 = filter(lambda x: len(x) != 0 and x not in banned, p1)
+        count = collections.defaultdict(int)
+        for word in p1:
+            count[word] += 1
+        
+        ans = collections.Counter(count)
+        
+        return ans.most_common(1)[0][0]
+        
+        
