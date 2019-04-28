@@ -1,5 +1,7 @@
+#SOLUTION 1
+#DFS
+
 class Solution(object):
-    
             
     def numIslands(self, grid):
         """
@@ -35,6 +37,41 @@ class Solution(object):
                     expand(grid,m,n)
                     
         return cnt
+      
+#SOLUTION 2
+#BFS
+
+class Solution(object):
+    def numIslands(self, grid):
+        """
+        :type grid: List[List[str]]
+        :rtype: int
+        """
+        if not grid: return 0
+        
+        col = len(grid[0])
+        row = len(grid)
+        directions = ([-1,0],[1,0],[0,-1],[0,1])
+        cnt, que = 0, collections.deque()
+        
+        for i in range(row):
+            for j in range(col):
+                if grid[i][j] == '1':
+                    cnt += 1
+                    que.append((i,j))
+                    grid[i][j] = '0'
+                    while que:
+                        x,y = que.pop()
+                        for dic in directions:
+                            nx, ny = x + dic[0], y + dic[1]
+                            if 0 <= nx < row and 0 <= ny < col and grid[nx][ny] == '1':
+                                grid[nx][ny] = '0'
+                                que.append((nx,ny))
+        return cnt
+                            
+                       
+#SOLUTION 3
+#Union Find
 
 
     
