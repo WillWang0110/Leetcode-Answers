@@ -1,0 +1,19 @@
+class Solution(object):
+    def twoSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        
+        hashmap = {}
+        res = []
+        for idx, num in enumerate(nums):
+            if (target - num) not in hashmap:
+                hashmap[num] = idx
+            else:
+                res.append(idx)
+                res.append(hashmap[target - num])
+                
+                return res
+                
