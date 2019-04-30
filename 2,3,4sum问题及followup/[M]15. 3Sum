@@ -1,3 +1,41 @@
+#标准做法：
+对于排序后的数组遍历，对每个位置都从它的后一个元素和末尾一个元素向中间集中，如果和为0就添加到结果数组中。这里需要注意的地方是需要跳过相同的数字，因为同样的数字组合只能出现一次嘛。也就是两个while，注意判断相等的条件：i是向前面判断，j是向后面判断。
+
+这个方法不用使用set来保存已经遍历过的数字组合，因为对于原数组来说每次向后遍历的过程中，同样的组合只能出现一次。
+
+时间复杂度是O(N^2)，空间复杂度是O(1)。
+
+class Solution(object):
+    def threeSum(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        
+        if not nums: return []
+        ans = []
+        
+        nums.sort()
+        for t in range(len(nums) - 2):
+            i, j = t + 1, len(nums) - 1
+            if t > 0 and nums[t] == nums[t-1]:continue
+            while i < j:
+                _sum = nums[t] + nums[i] + nums[j]
+                if _sum == 0:
+                    ans.append([nums[t],nums[i],nums[j]])
+                    i += 1
+                    j -= 1
+                    while i < j and nums[i] == nums[i-1]:
+                        i += 1
+                    while i< j and nums[j] == nums[j+1]:
+                        j -= 1
+                elif _sum < 0:
+                    i += 1
+                else: j -= 1
+        return ans
+
+#Twosum的改进做法
+
 class Solution(object):
     def threeSum(self, nums):
         """
