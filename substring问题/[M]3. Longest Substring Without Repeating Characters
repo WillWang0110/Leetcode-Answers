@@ -1,3 +1,26 @@
+#使用sliding window + hashmap
+
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        if not s: return 0
+        
+        hashmap = {}
+        
+        start, end, k = 0, 0, 0
+        for end in range(len(s)):
+            if s[end] in hashmap:
+                start = max(start, hashmap[s[end]] + 1)
+            hashmap[s[end]] = end
+            k = max(k,end - start + 1)
+    
+        return k
+            
+#使用虫取法 + set
+
 class Solution:
     def lengthOfLongestSubstring(self, s):
         
