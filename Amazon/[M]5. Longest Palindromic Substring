@@ -1,4 +1,4 @@
-###Previous answer
+###Expand Around Center
 
 class Solution(object):
     def longestPalindrome(self, s):
